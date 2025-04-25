@@ -20,3 +20,77 @@ export default defineConfigWithVueTs(
   vueTsConfigs.recommended,
   ...pluginOxlint.configs['flat/recommended'],
 )
+
+const INLINE_ELEMENTS = require('eslint-plugin-vue/lib/utils/inline-non-void-elements.json')
+
+module.exports = {
+  env: {
+    node: true,
+    'vue/setup-compiler-macros': true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:vue/vue3-recommended',
+    '@vue/typescript/recommended',
+    'plugin:storybook/recommended',
+  ],
+  ignorePatterns: [
+    '**/*.mdx',
+    '**/*.css',
+    'src/scripts/*.js',
+    'src/**/*.typegen.ts',
+    'src/graphql/**/*.ts',
+  ],
+  rules: {
+    'vue/multi-word-component-names': 'off',
+    'vue/multiline-html-element-content-newline': ['error', {
+      'ignoreWhenEmpty': true,
+      'ignores': ['RouterLink', ...INLINE_ELEMENTS],
+      'allowEmptyLines': false,
+    }],
+    '@typescript-eslint/ban-ts-ignore': 0,
+    '@typescript-eslint/indent': ['error', 2],
+    'linebreak-style': [
+      'error',
+      'unix',
+    ],
+    'quotes': [
+      'error',
+      'single', {
+        'allowTemplateLiterals': true,
+      },
+    ],
+    'semi': [
+      'error',
+      'never',
+    ],
+    'space-before-function-paren': [
+      'warn',
+      'always',
+    ],
+    'keyword-spacing': [
+      'error',
+    ],
+    'space-before-blocks': [
+      'error',
+    ],
+    'object-curly-spacing': [
+      'warn',
+      'always',
+    ],
+    'eol-last': [
+      'error',
+      'always',
+    ],
+    'comma-dangle': [
+      'error',
+      {
+        'arrays': 'always-multiline',
+        'objects': 'always-multiline',
+        'imports': 'always-multiline',
+        'exports': 'always-multiline',
+        'functions': 'never',
+      },
+    ],
+  },
+}
