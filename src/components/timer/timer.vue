@@ -4,7 +4,7 @@
 
     <div class="flex justify-center gap-8 mt-4">
       <div class="flex flex-col items-center">
-        <span class="text-5xl font-bold text-gray-500">
+        <span class="text-4xl md:text-5xl font-bold text-gray-500">
           {{ days }}
         </span>
 
@@ -14,7 +14,7 @@
       </div>
 
       <div class="flex flex-col items-center">
-        <span class="text-5xl font-bold text-gray-500">
+        <span class="text-4xl md:text-5xl font-bold text-gray-500">
           {{ hours }}
         </span>
 
@@ -24,7 +24,7 @@
       </div>
 
       <div class="flex flex-col items-center">
-        <span class="text-5xl font-bold text-gray-500">
+        <span class="text-4xl md:text-5xl font-bold text-gray-500">
           {{ minutes }}
         </span>
 
@@ -34,7 +34,7 @@
       </div>
 
       <div class="flex flex-col items-center">
-        <span class="text-5xl font-bold text-gray-500">
+        <span class="text-4xl md:text-5xl font-bold text-gray-500">
           {{ seconds }}
         </span>
 

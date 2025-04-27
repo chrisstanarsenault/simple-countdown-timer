@@ -1,6 +1,6 @@
 <template>
   <div class="bg-black w-full h-screen flex flex-col items-center justify-center">
-    <Header class="mt-20" />
+    <Header />
 
     <main>
       <Timer />
