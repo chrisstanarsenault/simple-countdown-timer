@@ -4,7 +4,7 @@
 
     <div class="flex justify-center gap-8 mt-4">
       <div class="flex flex-col items-center">
-        <span class="text-5xl font-bold text-gray-800">
+        <span class="text-5xl font-bold text-gray-500">
           {{ days }}
         </span>
 
@@ -14,7 +14,7 @@
       </div>
 
       <div class="flex flex-col items-center">
-        <span class="text-5xl font-bold text-gray-800">
+        <span class="text-5xl font-bold text-gray-500">
           {{ hours }}
         </span>
 
@@ -24,7 +24,7 @@
       </div>
 
       <div class="flex flex-col items-center">
-        <span class="text-5xl font-bold text-gray-800">
+        <span class="text-5xl font-bold text-gray-500">
           {{ minutes }}
         </span>
 
@@ -34,7 +34,7 @@
       </div>
 
       <div class="flex flex-col items-center">
-        <span class="text-5xl font-bold text-gray-800">
+        <span class="text-5xl font-bold text-gray-500">
           {{ seconds }}
         </span>
 
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div v-if="true" class="mb-8 mt-8">
+    <div v-if="showAnniversary" class="mb-8 mt-8">
       <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded" role="alert">
           <p class="font-bold">Happy {{ currentWeek }} week anniversary!</p>
       </div>
