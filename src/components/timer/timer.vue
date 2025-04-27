@@ -1,11 +1,6 @@
 <template>
-  <div class="flex items-center justify-center text-center p-8 font-sans">
-    <ConfettiExplosion  :particleSize="5" :duration="3000" />
-    <div v-if="showAnniversary" class="mb-8">
-      <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded" role="alert">
-        <p class="font-bold">Happy {{ currentWeek }} week anniversary!</p>
-      </div>
-    </div>
+  <div class="flex flex-col items-center justify-center text-center p-8 font-sans">
+    <ConfettiExplosion v-if="showExplosion" :particleSize="5" :duration="3000" />
 
     <div class="flex justify-center gap-8 mt-4">
       <div class="flex flex-col items-center">
@@ -46,6 +41,12 @@
         <span class="text-sm text-gray-600 uppercase tracking-wider">
           Seconds
         </span>
+      </div>
+    </div>
+
+    <div v-if="true" class="mb-8 mt-8">
+      <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded" role="alert">
+          <p class="font-bold">Happy {{ currentWeek }} week anniversary!</p>
       </div>
     </div>
   </div>
