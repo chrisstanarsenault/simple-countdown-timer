@@ -1,5 +1,10 @@
 <template>
   <div class="text-center p-8 font-sans">
+    <div v-if="showAnniversary" class="mb-8">
+      <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded" role="alert">
+        <p class="font-bold">Happy {{ currentWeek }} week anniversary!</p>
+      </div>
+    </div>
 
     <div class="flex justify-center gap-8 mt-4">
       <div class="flex flex-col items-center">
@@ -46,13 +51,39 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const targetDate = new Date('2025-05-30T12:00:00')
 const days = ref(0)
 const hours = ref(0)
 const minutes = ref(0)
 const seconds = ref(0)
+const lastAnnouncedWeek = ref(4) // Starting from week 4
+const showAnniversary = ref(false)
+
+const currentWeek = computed(() => {
+  const now = new Date()
+  const startDate = new Date('2025-05-30T12:00:00')
+  const diffTime = Math.abs(startDate - now)
+  const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7))
+  return diffWeeks
+})
+
+const isSaturday = () => {
+  return new Date().getDay() === 6
+}
+
+const checkAnniversary = () => {
+  if (isSaturday() && currentWeek.value > lastAnnouncedWeek.value) {
+    showAnniversary.value = true
+    lastAnnouncedWeek.value = currentWeek.value
+
+    // Hide the message after 24 hours
+    setTimeout(() => {
+      showAnniversary.value = false
+    }, 24 * 60 * 60 * 1000)
+  }
+}
 
 let timer
 
@@ -72,6 +103,8 @@ const updateTimer = () => {
   hours.value = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
   minutes.value = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
   seconds.value = Math.floor((diff % (1000 * 60)) / 1000)
+
+  checkAnniversary()
 }
 
 onMounted(() => {
