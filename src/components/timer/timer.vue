@@ -12,7 +12,7 @@
       <ConfettiExplosion v-if="showExplosion3" :particleSize="5" :duration="4000" class="ml-20" />
     </div>
 
-    <div class="flex justify-center gap-8 mt-4">
+    <div class="flex justify-center gap-6 md:gap-8 mt-4">
       <div class="flex flex-col items-center">
         <span class="text-4xl md:text-5xl font-bold text-gray-500">
           {{ days }}
@@ -54,8 +54,13 @@
       </div>
     </div>
 
-    <div v-if="true" class="mb-8 mt-8">
-      <p class="font-bold text-purple-600 text-6xl">Happy <span class="text-blue-600 text-7xl">{{ currentWeek }}</span> week anniversary!</p>
+    <div v-if="showAnniversary" class="mb-8 mt-8">
+      <p class="font-bold text-purple-600 text-4xl md:text-6xl flex flex-wrap justify-center gap-x-2">
+        <AnimatedText text="Happy " />
+        <AnimatedText :text="currentWeek.toString()" class="text-blue-600 text-5xl md:text-7xl" />
+        <AnimatedText text=" week" />
+        <AnimatedText text="anniversary!" />
+      </p>
     </div>
   </div>
 </template>
@@ -63,6 +68,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import ConfettiExplosion from "vue-confetti-explosion";
+import AnimatedText from './AnimatedText.vue'
 
 const targetDate = new Date('2025-05-30T12:00:00')
 const days = ref<number>(0)
@@ -151,3 +157,20 @@ onUnmounted(() => {
   }
 })
 </script>
+
+<style scoped>
+@keyframes letterBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-letter {
+  display: inline-block;
+  animation: letterBounce 0.5s ease-in-out;
+  animation-fill-mode: both;
+}
+</style>
