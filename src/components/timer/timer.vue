@@ -79,7 +79,7 @@ const currentWeek = computed(() => {
   const now = new Date()
   const startDate = new Date('2025-05-30T12:00:00')
   const diffTime = Math.abs(startDate.getTime() - now.getTime())
-  const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7))
+  const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7))
   return diffWeeks
 })
 
