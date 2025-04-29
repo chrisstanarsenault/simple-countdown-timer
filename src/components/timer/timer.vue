@@ -1,6 +1,16 @@
 <template>
   <div class="flex flex-col items-center justify-center text-center p-8 font-sans">
-    <ConfettiExplosion v-if="showExplosion" :particleSize="5" :duration="3000" />
+    <div>
+      <ConfettiExplosion v-if="showExplosion1" :particleSize="5" :duration="3000" />
+    </div>
+
+    <div class="ml-40">
+      <ConfettiExplosion v-if="showExplosion2" :particleSize="5" :duration="5000" class="ml-10" />
+    </div>
+
+    <div class="ml-80">
+      <ConfettiExplosion v-if="showExplosion3" :particleSize="5" :duration="4000" class="ml-20" />
+    </div>
 
     <div class="flex justify-center gap-8 mt-4">
       <div class="flex flex-col items-center">
@@ -44,10 +54,8 @@
       </div>
     </div>
 
-    <div v-if="showAnniversary" class="mb-8 mt-8">
-      <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded" role="alert">
-          <p class="font-bold">Happy {{ currentWeek }} week anniversary!</p>
-      </div>
+    <div v-if="true" class="mb-8 mt-8">
+      <p class="font-bold text-purple-600 text-6xl">Happy <span class="text-blue-600 text-7xl">{{ currentWeek }}</span> week anniversary!</p>
     </div>
   </div>
 </template>
@@ -63,7 +71,9 @@ const minutes = ref<number>(0)
 const seconds = ref<number>(0)
 const lastAnnouncedWeek = ref<number>(4) // Starting from week 4
 const showAnniversary = ref<boolean>(false)
-const showExplosion = ref<boolean>(false)
+const showExplosion1 = ref<boolean>(false)
+const showExplosion2 = ref<boolean>(false)
+const showExplosion3 = ref<boolean>(false)
 
 const currentWeek = computed(() => {
   const now = new Date()
@@ -80,7 +90,13 @@ const isSaturday = (): boolean => {
 const checkAnniversary = () => {
   if (isSaturday() && currentWeek.value > lastAnnouncedWeek.value) {
     showAnniversary.value = true
-    showExplosion.value = true
+    showExplosion1.value = true
+    setTimeout(() => {
+      showExplosion2.value = true
+    }, 1000)
+    setTimeout(() => {
+      showExplosion3.value = true
+    }, 2000)
     lastAnnouncedWeek.value = currentWeek.value
 
     // Hide the message after 24 hours
@@ -112,7 +128,19 @@ const updateTimer = () => {
   checkAnniversary()
 }
 
+// For testing purposes
+// const triggerExplosion = () => {
+//   showExplosion1.value = true
+//   setTimeout(() => {
+//     showExplosion2.value = true
+//   }, 1000)
+//   setTimeout(() => {
+//     showExplosion3.value = true
+//   }, 2000)
+// }
+
 onMounted(() => {
+  // triggerExplosion()
   updateTimer()
   timer = window.setInterval(updateTimer, 1000)
 })
