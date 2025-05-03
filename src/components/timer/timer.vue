@@ -75,7 +75,7 @@ const days = ref<number>(0)
 const hours = ref<number>(0)
 const minutes = ref<number>(0)
 const seconds = ref<number>(0)
-const lastAnnouncedWeek = ref<number>(4) // Starting from week 4
+const lastAnnouncedWeek = ref<number>(-1)
 const showAnniversary = ref<boolean>(false)
 const showExplosion1 = ref<boolean>(false)
 const showExplosion2 = ref<boolean>(false)
@@ -83,10 +83,10 @@ const showExplosion3 = ref<boolean>(false)
 
 const currentWeek = computed(() => {
   const now = new Date()
-  const startDate = new Date('2025-05-30T12:00:00')
-  const diffTime = Math.abs(startDate.getTime() - now.getTime())
-  const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7))
-  return diffWeeks
+  const startDate = new Date('2025-03-29T12:00:00')
+  const diffTime = now.getTime() - startDate.getTime()
+  if (diffTime < 0) return 0
+  return Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7))
 })
 
 const isSaturday = (): boolean => {
